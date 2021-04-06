@@ -18,12 +18,19 @@
                 <img src="img/Net-logo-large-red.png" alt="Logo Netflix">
             </div>
             <div class="search_cont">
-                <input id="src-bar" type="search">
-                <div id="src-btn"><i class="fas fa-search"></i></div>
+                <input id="src-bar" type="search" v-model="query" @keyup.enter="printMovies">
+                <div id="src-btn"><i class="fas fa-search" @click="printMovies"></i></div>
             </div>
         </header>
         <main>
             <div class="container">
+                <div id="movies">
+                    <div class="movie" v-for="movie in movies">
+                        <h2>{{movie.title}}</h2>
+                        <p class="original_title">{{movie.original_title}}</p>
+                        <p class="original_language">{{movie.original_language}}</p>
+                        <p class="rating">{{movie.vote_average}}</p>
+                </div>
             </div>
         </main>
     </div>
