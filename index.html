@@ -35,7 +35,8 @@
                         <p v-if="med.original_name" class="original_title">{{med.original_name}}</p>
                         <p v-if="med.original_title" class="original_title">{{med.original_title}}</p>
                         <div class="original_language">
-                            <img :src="'img/flags/'+getFlag(i)" alt="original_language+'_lang'">
+                            <img v-if="flags.includes(med.original_language+'.png')" :src="'img/flags/'+getFlag(i)" alt="original_language+'_lang'">
+                            <p v-else>{{med.original_language}}</p>
                         </div>
                         <div class="rating">{{getRating(i)}}</div>
                 </div>
