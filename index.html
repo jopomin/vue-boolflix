@@ -25,11 +25,17 @@
         <main>
             <div class="container">
                 <div id="movies">
-                    <div class="movie" v-for="movie in movies">
-                        <h2>{{movie.title}}</h2>
-                        <p class="original_title">{{movie.original_title}}</p>
-                        <p class="original_language">{{movie.original_language}}</p>
-                        <p class="rating">{{movie.vote_average}}</p>
+                    <div class="movie" v-for="(movie, i) in movies">
+                        <div class="movie-img-cont">
+                            <img v-if="movie.poster_path" :src="'https://image.tmdb.org/t/p/w500'+getPoster(i)" alt="movie.title+'_poster'">
+                            <div v-else class="no_poster">Poster not available</div>
+                        </div>
+                        <h2>{{getTitleRed(i)}}</h2>
+                        <p class="original_title">{{getOrTitleRed(i)}}</p>
+                        <div class="original_language">
+                            <img :src="'img/flags/'+getFlag(i)" alt="original_language+'_lang'">
+                        </div>
+                        <p class="rating">{{getRating(i)}}</p>
                 </div>
             </div>
         </main>

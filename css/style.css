@@ -74,19 +74,59 @@ header {
 
 .movie {
     width: 200px;
-    height: 300px;
+    height: 500px;
     background: rgba(120, 120, 120, 0.1);
     padding: 20px;
-    text-align: center;
     color: #fff;
     margin: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+}
+
+.movie-img-cont {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.movie-img-cont img {
+    max-width: 100%;
+}
+
+.no_poster {
+    height: 240px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    color: #051025;
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    font-size: 18px;
 }
 
 .movie h2 {
-    margin-bottom: 20px;
+    margin-bottom: 12px;
     color: #E50914;
+    font-size: 20px;
 }
 
-.movie p {
+.original_title {
+    font-style: italic;
+    color:rgba(255, 255, 255, 0.6);
+    font-size: 15px;
+    margin-bottom: 18px;
+}
+
+.original_language {
+    height: 25px;
+    width: 25px;
     margin: 10px 0;
+}
+
+.original_language img {
+    height: 100%;
 }
