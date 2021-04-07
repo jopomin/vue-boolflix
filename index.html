@@ -18,24 +18,26 @@
                 <img src="img/Net-logo-large-red.png" alt="Logo Netflix">
             </div>
             <div class="search_cont">
-                <input id="src-bar" type="search" v-model="query" @keyup.enter="printMovies">
-                <div id="src-btn"><i class="fas fa-search" @click="printMovies"></i></div>
+                <input id="src-bar" type="search" v-model="query" @keyup.enter="printRes">
+                <div id="src-btn"><i class="fas fa-search" @click="printRes"></i></div>
             </div>
         </header>
         <main>
             <div class="container">
-                <div id="movies">
-                    <div class="movie" v-for="(movie, i) in movies">
-                        <div class="movie-img-cont">
-                            <img v-if="movie.poster_path" :src="'https://image.tmdb.org/t/p/w500'+getPoster(i)" alt="movie.title+'_poster'">
+                <div id="media">
+                    <div class="media" v-for="(med, i) in media" :class="med.name?'tvseries':'movie'">
+                        <div class="media-img-cont">
+                            <img v-if="med.poster_path" :src="'https://image.tmdb.org/t/p/w500'+getPoster(i)" alt="">
                             <div v-else class="no_poster">Poster not available</div>
                         </div>
-                        <h2>{{getTitleRed(i)}}</h2>
-                        <p class="original_title">{{getOrTitleRed(i)}}</p>
+                        <h2 v-if="med.name">{{med.name}}</h2>
+                        <h2 v-if="med.title">{{med.title}}</h2>
+                        <p v-if="med.original_name" class="original_title">{{med.original_name}}</p>
+                        <p v-if="med.original_title" class="original_title">{{med.original_title}}</p>
                         <div class="original_language">
                             <img :src="'img/flags/'+getFlag(i)" alt="original_language+'_lang'">
                         </div>
-                        <p class="rating">{{getRating(i)}}</p>
+                        <div class="rating">{{getRating(i)}}</div>
                 </div>
             </div>
         </main>

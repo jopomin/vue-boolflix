@@ -3,6 +3,8 @@ var app = new Vue ({
     data: {
         query: "",
         movies: [],
+        series: [],
+        media: [],
         flags: [
             'fr.png',
             'es.png',
@@ -29,7 +31,7 @@ var app = new Vue ({
     },
     
     methods: {
-            printMovies() {
+            printRes() {
                 const self = this;
                 axios
                 .get('https://api.themoviedb.org/3/search/movie', { params: {
@@ -41,42 +43,58 @@ var app = new Vue ({
                 .then((response) => {
                     self.movies = response.data.results;
                     console.log(self.movies);
-                    self.query = "";
+                });
+
+                axios
+                .get('https://api.themoviedb.org/3/search/tv', { params: {
+                    api_key: '5417de2452f12562ccb44aa243d20d03',
+                    query: self.query,
+                    language: 'it-IT'
+                    }
                 })
+                .then((response) => {
+                    self.series = response.data.results
+                    console.log(self.series);
+                    self.media = [...self.movies,...self.series];
+                    self.query = "";
+                    self.movies = "";
+                    self.series = "";
+                    console.log(self.media);
+                });
+               
             },
 
-            getTitleRed(i) {
-                if (this.movies[i].title.length > 25) {
-                    return this.movies[i].title.slice(0,25) + '...';
+/*             getTitleRed(i) {
+                if ((this.media[i].title.length || this.media[i].name.length) > 25) {
+                    return (this.media[i].title || this.media[i].name).slice(0,25) + '...';
                 } else {
-                    return this.movies[i].title
+                    return (this.media[i].title || this.media[i].name)
                 }
             },
 
             getOrTitleRed(i) {
-                if (this.movies[i].original_title.length > 35) {
-                    return this.movies[i].original_title.slice(0,35) + '...';
+                if ((this.media[i].original_title.length || this.media[i].original_name.length) > 35) {
+                    return (this.media[i].original_title || this.media[i].original_name).slice(0,35) + '...';
                 } else {
-                    return this.movies[i].original_title
+                    return (this.media[i].original_title || this.media[i].original_name)
                 }
-            },
+            }, */
 
             getRating(i) {
-                return parseInt(this.movies[i].vote_average / 2);
+                return Math.ceil(this.media[i].vote_average / 2);
             },
 
             getFlag(i) {
-                if (this.flags.includes(this.movies[i].original_language+'.png')) {
-                    const indexFlag = this.flags.indexOf(this.movies[i].original_language+'.png');
-                    console.log(indexFlag);
+                if (this.flags.includes(this.media[i].original_language+'.png')) {
+                    const indexFlag = this.flags.indexOf(this.media[i].original_language+'.png');
                     return this.flags[indexFlag];
                 } else {
-                    return this.movies[i].original_language
+                    return this.media[i].original_language
                 }
             },
 
             getPoster(i) {
-                return this.movies[i].poster_path
+                return this.media[i].poster_path
             }
     }
 })

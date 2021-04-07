@@ -64,7 +64,7 @@ header {
     width: 80%;
 }
 
-#movies {
+#media {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -72,10 +72,9 @@ header {
     padding: 50px 0;
 }
 
-.movie {
+.media {
     width: 200px;
     height: 500px;
-    background: rgba(120, 120, 120, 0.1);
     padding: 20px;
     color: #fff;
     margin: 10px;
@@ -86,12 +85,12 @@ header {
     text-align: center;
 }
 
-.movie-img-cont {
+.media-img-cont {
     width: 100%;
     margin-bottom: 20px;
 }
 
-.movie-img-cont img {
+.media-img-cont img {
     max-width: 100%;
 }
 
@@ -108,7 +107,7 @@ header {
     font-size: 18px;
 }
 
-.movie h2 {
+.media h2 {
     margin-bottom: 12px;
     color: #E50914;
     font-size: 20px;
@@ -129,4 +128,12 @@ header {
 
 .original_language img {
     height: 100%;
+}
+
+.tvseries {
+    background: rgba(255, 0, 30, 0.1);
+}
+
+.movie {
+    background: rgba(120, 120, 120, 0.1);
 }
