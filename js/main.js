@@ -64,38 +64,30 @@ var app = new Vue ({
                
             },
 
-/*             getTitleRed(i) {
-                if ((this.media[i].title.length || this.media[i].name.length) > 25) {
-                    return (this.media[i].title || this.media[i].name).slice(0,25) + '...';
-                } else {
-                    return (this.media[i].title || this.media[i].name)
-                }
+            getRating(rate) {
+                return Math.ceil(rate / 2);
             },
 
-            getOrTitleRed(i) {
-                if ((this.media[i].original_title.length || this.media[i].original_name.length) > 35) {
-                    return (this.media[i].original_title || this.media[i].original_name).slice(0,35) + '...';
-                } else {
-                    return (this.media[i].original_title || this.media[i].original_name)
-                }
-            }, */
-
-            getRating(i) {
-                return Math.ceil(this.media[i].vote_average / 2);
-            },
-
-            getFlag(i) {
-                if (this.flags.includes(this.media[i].original_language+'.png')) {
-                    const indexFlag = this.flags.indexOf(this.media[i].original_language+'.png');
+            getFlag(lang) {
+                if (this.flags.includes(lang +'.png')) {
+                    const indexFlag = this.flags.indexOf(lang +'.png');
                     return this.flags[indexFlag];
                 } else {
-                    return this.media[i].original_language
+                    return lang
                 }
             },
 
-            getPoster(i) {
-                return this.media[i].poster_path
-            }
+            getPoster(poster) {
+                return poster
+            },
+
+            getOverRed(overview) {
+                if (overview.length > 350) {
+                    return overview.slice(0,350) + '...';
+                } else {
+                    return overview
+                }
+            },
     }
 })
 
