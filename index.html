@@ -25,12 +25,12 @@
         <main>
             <div class="container">
                 <div id="media">
-                    <div class="media" v-for="(med, i) in media">
+                    <div class="media" v-for="(med, i) in media" @mouseenter="showDetails(i)" @mouseleave="hideDetails">
                         <div class="media-img-cont">
                             <img v-if="med.poster_path" :src="'https://image.tmdb.org/t/p/w342'+getPoster(med.poster_path)" alt="">
                             <div v-else class="no_poster">Poster non disponibile</div>
                         </div>
-                        <div class="hover_layer" :class="med.name?'tvseries':'movie'">
+                        <div class="hover_layer" :class="med.name?'tvseries':'movie'" v-if="card.visible && card.index === i">
                             <div class="title-box">
                                 <h2 v-if="med.name">{{med.name}}</h2>
                                 <h2 v-if="med.title">{{med.title}}</h2>

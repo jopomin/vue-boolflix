@@ -27,7 +27,11 @@ var app = new Vue ({
             'da.png',
             'fi.png',
             'el.png'
-        ]
+        ],
+        card: {
+            visible: false,
+            index: false,
+        }
     },
     
     methods: {
@@ -82,12 +86,26 @@ var app = new Vue ({
             },
 
             getOverRed(overview) {
-                if (overview.length > 350) {
-                    return overview.slice(0,350) + '...';
+                if (overview.length > 320) {
+                    return overview.slice(0,320) + '...';
                 } else {
                     return overview
                 }
             },
+
+            showDetails(i) {
+                if (this.card.visible !== false && this.card.index !== i) {
+                    this.card.visible = false;
+                    this.card.index = false;
+                }
+                this.card.visible = !this.card.visible;
+                this.card.index = i;
+            },
+
+            hideDetails() {
+                this.card.visible = false;
+                this.card.index = false;
+            }
     }
 })
 
