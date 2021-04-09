@@ -5,6 +5,7 @@ var app = new Vue ({
         movies: [],
         series: [],
         media: [],
+        ids: [],
         flags: [
             'fr.png',
             'es.png',
@@ -46,7 +47,6 @@ var app = new Vue ({
                 })
                 .then((response) => {
                     self.movies = response.data.results;
-                    console.log(self.movies);
                 });
 
                 axios
@@ -57,15 +57,19 @@ var app = new Vue ({
                     }
                 })
                 .then((response) => {
-                    self.series = response.data.results
-                    console.log(self.series);
+                    self.series = response.data.results;
                     self.media = [...self.movies,...self.series];
-                    self.query = "";
                     self.movies = "";
                     self.series = "";
+                    self.media.sort((a,b) => (a.popularity > b.popularity) ? -1 : (a.popularity < b.popularity) ? 1 : 0);
                     console.log(self.media);
+                    self.media.forEach((med) => {
+                        if (!self.ids.includes(med.id)) {
+                            self.ids.push(med.id)
+                        }
+                    });
+                    console.log(self.ids);
                 });
-               
             },
 
             getRating(rate) {
@@ -83,6 +87,14 @@ var app = new Vue ({
 
             getPoster(poster) {
                 return poster
+            },
+
+            getTitleRed(title) {
+                if (title.length > 50) {
+                    return title.slice(0,50) + '...';
+                } else {
+                    return title
+                }
             },
 
             getOverRed(overview) {
@@ -105,7 +117,8 @@ var app = new Vue ({
             hideDetails() {
                 this.card.visible = false;
                 this.card.index = false;
-            }
+            },
+
     }
 })
 

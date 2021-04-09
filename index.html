@@ -18,7 +18,7 @@
                 <img src="img/Net-logo-large-red.png" alt="Logo Netflix">
             </div>
             <div class="search_cont">
-                <input id="src-bar" type="search" v-model="query" @keyup.enter="printRes">
+                <input id="src-bar" type="text" v-model="query" @keyup.enter="printRes">
                 <div id="src-btn"><i class="fas fa-search" @click="printRes"></i></div>
             </div>
         </header>
@@ -28,12 +28,16 @@
                     <div class="media" v-for="(med, i) in media" @mouseenter="showDetails(i)" @mouseleave="hideDetails">
                         <div class="media-img-cont">
                             <img v-if="med.poster_path" :src="'https://image.tmdb.org/t/p/w342'+getPoster(med.poster_path)" alt="">
-                            <div v-else class="no_poster">Poster non disponibile</div>
+                            <div v-else class="no_poster">
+                                <h2 v-if="med.name">{{getTitleRed(med.name)}}</h2>
+                                <h2 v-if="med.title">{{getTitleRed(med.title)}}</h2>
+                                <p>Poster non disponibile</p>
+                            </div>
                         </div>
                         <div class="hover_layer" :class="med.name?'tvseries':'movie'" v-if="card.visible && card.index === i">
                             <div class="title-box">
-                                <h2 v-if="med.name">{{med.name}}</h2>
-                                <h2 v-if="med.title">{{med.title}}</h2>
+                                <h2 v-if="med.name">{{getTitleRed(med.name)}}</h2>
+                                <h2 v-if="med.title">{{getTitleRed(med.title)}}</h2>
                                 <p v-if="med.original_name" class="original_title">{{med.original_name}}</p>
                                 <p v-if="med.original_title" class="original_title">{{med.original_title}}</p>
                             </div>
