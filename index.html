@@ -40,6 +40,9 @@
                                 <h2 v-if="med.title">{{getTitleRed(med.title)}}</h2>
                                 <p v-if="med.original_name" class="original_title">{{med.original_name}}</p>
                                 <p v-if="med.original_title" class="original_title">{{med.original_title}}</p>
+                                <div class="act-box" v-if="actor.visible && actor.index === i">
+                                    <p class="act-list" v-for="act in cast">{{act}}, </p>
+                                </div>
                             </div>
                             <div class="overview-box">
                                 <p v-if="med.overview" class="overview">{{getOverRed(med.overview)}}</p>
@@ -50,6 +53,7 @@
                                     <img v-if="flags.includes(med.original_language+'.png')" :src="'img/flags/'+getFlag(med.original_language)" alt="original_language+'_lang'">
                                     <p v-else>{{med.original_language}}</p>
                                 </div>
+                                <button class="act-btn" @click="getCast(med.id, i)">Cast</button>
                                 <div class="rating">
                                     <i v-for="i in getRating(med.vote_average)" class="fullstar fas fa-star"></i>
                                     <i v-for="i in (5 - getRating(med.vote_average))" class="emptystar far fa-star"></i>
